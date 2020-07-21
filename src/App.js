@@ -11,10 +11,11 @@ import BaiTapChonXe from "./RenderWithState/BaiTapChonXe";
 import RenderWithMap from "./RenderWithState/RenderWithMap/RenderWithMap";
 import ExampleGlasses from "./RenderWithState/ExampleGlasses";
 import DemoProps from "./Props/DemoProps";
+import ExampleCard from "./LiftingUpState/ExampleCard";
 function App() {
   return (
     <div className="App">
-      <BaiTapLayout />
+      {/* <BaiTapLayout /> */}
       {/* <BaiTapLayout2 /> */}
       {/* <DataBinding /> */}
       {/* <EventBinding /> */}
@@ -22,7 +23,8 @@ function App() {
       {/* <BaiTapChonXe /> */}
       {/* <RenderWithMap /> */}
       {/* <ExampleGlasses /> */}
-      <DemoProps />
+      {/* <DemoProps /> */}
+      <ExampleCard />
     </div>
   );
 }
