@@ -10,11 +10,11 @@ export default class Card extends Component {
                         <img src={item.hinhAnh} alt="asda" style={{ width: 100 }} />
                     </td>
                     <td>{item.tenSP}</td>
-                    <td>{item.giaban}</td>
+                    <td>{item.giaBan}</td>
                     <td>
-                        <button className="btn btn-info">-</button><span className="mx-2">{item.soLuong}</span><button className="btn btn-info">+</button>
+                        <button onClick={() => { this.props.tangGiamSL(item.maSP, false) }} className="btn btn-info">-</button><span className="mx-2">{item.soLuong}</span><button onClick={() => { this.props.tangGiamSL(item.maSP, true) }} className="btn btn-info">+</button>
                     </td>
-                    <td>17100000$</td>
+                    <td>{item.giaBan * item.soLuong}</td>
                     <td><button className="btn btn-danger" onClick={() => {
                         this.props.handleDelete(item);
                     }}>xóa</button></td>
@@ -22,6 +22,11 @@ export default class Card extends Component {
 
             )
         })
+    }
+    tinhTongTien = () => {
+        return this.props.cardList.reduce((tongTien, spGH, index) => {
+            return tongTien += spGH.soLuong * spGH.giaBan;
+        }, 0).toLocaleString();
     }
     render() {
         return (
@@ -46,12 +51,9 @@ export default class Card extends Component {
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td />
-                            <td />
-                            <td />
-                            <td />
-                            <td />
-                            <td>32300000</td>
+                            <td colSpan="4"></td>
+                            <td>Tong Tien</td>
+                            <td>{this.tinhTongTien()}</td>
                         </tr>
                     </tfoot>
                 </table>

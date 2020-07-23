@@ -12,6 +12,30 @@ export default class ExampleCard extends Component {
         proSelected: null,
         cardList: [],
     };
+    // xu li tang giam so luong
+    tangGiamSL = (maSP, tangGiam) => { //tang true, giam false
+        //tim ra sp chua maSP = voi maSP nut tang giam so luong click
+        // console.log("maSP", maSP);
+        // console.log('tangGiam', tangGiam);
+        let gioHangCapNhat = [...this.state.cardList];
+        let index = gioHangCapNhat.findIndex(spGioHang => spGioHang.maSP === maSP);
+        if (index !== -1) {
+            if (tangGiam) {
+                gioHangCapNhat[index].soLuong += 1;
+            } else {
+                if (gioHangCapNhat[index].soLuong > 1) {
+                    gioHangCapNhat[index].soLuong -= 1;
+                } else {
+                    alert('so luong toi thieu = 1')
+                }
+            }
+        }
+        //setState thay doi so luong
+        this.setState({
+            cardList: gioHangCapNhat
+        })
+    }
+
     // handle luon di theo state
     handleSelectPro = (pro) => {
         this.setState({
@@ -64,7 +88,7 @@ export default class ExampleCard extends Component {
         return (
             <div>
                 <div className="container">
-                    <Card cardList={this.state.cardList} handleDelete={this.handleDelete} />
+                    <Card cardList={this.state.cardList} handleDelete={this.handleDelete} tangGiamSL={this.tangGiamSL} />
                     <ProductList handleSelectPro={this.handleSelectPro} proList1={this.state.proList} handleBuy={this.handleBuy} />
                     {/* <div className="row">
                         {this.renderProList()}

@@ -12,6 +12,8 @@ import RenderWithMap from "./RenderWithState/RenderWithMap/RenderWithMap";
 import ExampleGlasses from "./RenderWithState/ExampleGlasses";
 import DemoProps from "./Props/DemoProps";
 import ExampleCard from "./LiftingUpState/ExampleCard";
+import BTGioHang from "./BTRedux/BTGioHang/BTGioHang";
+
 function App() {
   return (
     <div className="App">
@@ -24,7 +26,8 @@ function App() {
       {/* <RenderWithMap /> */}
       {/* <ExampleGlasses /> */}
       {/* <DemoProps /> */}
-      <ExampleCard />
+      {/* <ExampleCard /> */}
+      <BTGioHang />
     </div>
   );
 }
