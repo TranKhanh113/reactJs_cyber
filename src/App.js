@@ -13,6 +13,7 @@ import ExampleGlasses from "./RenderWithState/ExampleGlasses";
 import DemoProps from "./Props/DemoProps";
 import ExampleCard from "./LiftingUpState/ExampleCard";
 import BTGioHang from "./BTRedux/BTGioHang/BTGioHang";
+import GameBauCua from "./GameBauCua";
 
 function App() {
   return (
@@ -27,7 +28,8 @@ function App() {
       {/* <ExampleGlasses /> */}
       {/* <DemoProps /> */}
       {/* <ExampleCard /> */}
-      <BTGioHang />
+      {/* <BTGioHang /> */}
+      <GameBauCua />
     </div>
   );
 }
