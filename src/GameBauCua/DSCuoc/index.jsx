@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import { tangGamActions } from '../../redux/actions/GameBauCuaActions';
 class DSCuoc extends Component {
     renderDSCuoc = (list) => {
         return list.map((ele, index) => {
@@ -40,12 +41,19 @@ const mapDispatchToProps = (dispatch) => {
     return {
         //key la props of component: value la method send action to reducer
         tangGiamMucCuoc: (ma, tangGiam) => {
-            const actions = {
-                type: 'TANG_GIAM',
-                ma: ma,
-                tangGiam: tangGiam,
-            };
-            dispatch(actions);
+            // function tangGamActions() {
+            //     return {
+            //         type: 'TANG_GIAM',
+            //         ma: ma,
+            //         tangGiam: tangGiam,
+            //     };
+            // }
+            // const actions = {
+            //     type: 'TANG_GIAM',
+            //     ma: ma,
+            //     tangGiam: tangGiam,
+            // };
+            dispatch(tangGamActions(ma, tangGiam));
         },
     };
 };

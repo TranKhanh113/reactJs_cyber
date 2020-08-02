@@ -1,5 +1,6 @@
 import DSCuoc from "../../GameBauCua/DSCuoc";
-
+import { getRandomInt } from '../../Utils/RandomInt';
+import { TANG_GIAM } from '../constants/GameBauCuaConst';
 const iniitialState = {
     tongTien: 100,
     DanhSachCuoc: [
@@ -43,30 +44,33 @@ const iniitialState = {
         {
             ma: "bau",
             hinhAnh: "./img/bau.png",
-            giaCuoc: 0,
+
 
         },
         {
             ma: "cua",
             hinhAnh: "./img/cua.png",
-            giaCuoc: 0,
+
 
         },
         {
             ma: "tom",
             hinhAnh: "./img/tom.png",
-            giaCuoc: 0,
+
 
         }
     ]
 }
 const GameBauCuaReducer = (state = iniitialState, actions) => {
     switch (actions.type) {
-        case 'TANG_GIAM':
+        case TANG_GIAM:
             // console.log(actions)
             let { tongTien } = state;
+            if (actions.tangGiam && !tongTien) {
+                return { ...state }
+            }
+
             let danhSachCuoc = [...state.DanhSachCuoc];
-            debugger;
             let index = danhSachCuoc.findIndex((ele) => ele.ma === actions.ma);
             if (index !== -1) {
                 if (actions.tangGiam) {
@@ -84,6 +88,40 @@ const GameBauCuaReducer = (state = iniitialState, actions) => {
             state.tongTien = tongTien;
             // return state;
             return { ...state };
+        case 'CHOI_GAME': {
+            let { tongTien } = state;
+            let danhsachCuoc1 = [...state.DanhSachCuoc];
+            let danhsachCuoc2 = [...state.DanhSachCuoc];
+            let xucXac = [
+                danhsachCuoc1[getRandomInt(6)],
+                danhsachCuoc1[getRandomInt(6)],
+                danhsachCuoc1[getRandomInt(6)]
+            ];
+            // lay nhung con cuoc
+            danhsachCuoc1 = danhsachCuoc1.filter((ele) => ele.giaCuoc > 0);
+            //tra lai tien
+            for (let ele of danhsachCuoc1) {
+                let tralaiTien = xucXac.find((item) => item.ma === ele.ma);
+                if (tralaiTien) {
+                    tongTien += ele.giaCuoc;
+                }
+            }
+            //trung thuong
+            for (let ele of xucXac) {
+                let trungThuong = xucXac.find((item) => item.ma === ele.ma);
+                if (trungThuong) {
+                    tongTien += trungThuong.giaCuoc;
+                }
+            }
+            //update
+            let updateDSCuoc = [...state.DanhSachCuoc];
+            updateDSCuoc = updateDSCuoc.map((ele) => ({
+                ...ele,
+                giaCuoc: 0,
+            }));
+            return { ...state, xucXac, tongTien, DanhSachCuoc: updateDSCuoc }
+
+        }
         default:
             break;
     }
